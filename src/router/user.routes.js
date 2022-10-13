@@ -14,7 +14,10 @@ router.get('/registerError', registerErrorController)
 
 //Rutas Login-Loguot
 router.get('/login', loginController)
-router.post('/login', passport.authenticate("login", { failureRedirect: "/api/user/loginError" }), loginPostController )
+router.post('/login',(req, res, next)=>{
+    console.log("TEST LOGIN")
+    return next()
+}, passport.authenticate("login", { failureRedirect: "/api/user/loginError" }), loginPostController )
 router.get('/logout', logginMiddleware, logOutController)
 router.get('/loginError', loginErrorController)
 

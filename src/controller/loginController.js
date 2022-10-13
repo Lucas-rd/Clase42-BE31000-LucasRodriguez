@@ -26,12 +26,22 @@ const loginPostController = async (req, res) => {
     req.session.phoneNumber = loggedUser.phoneNumber
     req.session.avatar = loggedUser.avatar
     req.session.role = loggedUser.role
-
+    
+    
     //obtenemos los datos del carrito del user que logro logearse y guardamos su id en el req.session
     const loggedUserCart = await cartDAO.getByUserId(req.session.userId)
     req.session.cartId = loggedUserCart._id
+    
+    console.log("-------------------console.log desde login controler---------------------")
+    console.log("-------------------req.session.user---------------------", req.session.user)
+    console.log("-------------------req.session.userId---------------------", req.session.userId)
+    console.log("-------------------req.session.phoneNumber---------------------", req.session.phoneNumber)
+    console.log("-------------------req.session.role---------------------", req.session.role)
+    console.log("-------------------req.session.cartId---------------------", req.session.cartId)
+    
 
-    res.redirect("/api/products/all")
+    // res.redirect("/api/products/all")
+    res.status(200).send(req.session)
 }
 
 const logOutController = async (req, res) => {

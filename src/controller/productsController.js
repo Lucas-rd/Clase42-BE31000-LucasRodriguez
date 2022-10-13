@@ -18,8 +18,9 @@ const getAllProductsController = async (req, res) => {
         
         const products = await productDAO.getAll()
         const plantilla = validateAdmin(role)
-        // res.send(products)
-        res.render(plantilla, { email, products, cartId, avatar })
+
+        // res.render(plantilla, { email, products, cartId, avatar })
+        res.status(200).send(products)
     } catch (error) {
         logger.error(error)
     }
@@ -36,7 +37,8 @@ const getOneProductController = async (req, res) => {
         const products = await productDAO.getById(id)
         const plantilla = validateAdmin(role)
 
-        res.render(plantilla, { email, products, cartId, avatar })
+        // res.render(plantilla, { email, products, cartId, avatar })
+        res.status(200).send(products)
     } catch (error) {
         logger.error(error)
         res.redirect('/api/products/all')
@@ -56,8 +58,10 @@ const postNewProduct = async (req, res) => {
         const products = await productDAO.getAll()
         
         const plantilla = validateAdmin(role)
+        // res.render(plantilla, { email, products, cartId, avatar })
 
-        res.render(plantilla, { email, products, cartId, avatar })
+        res.status(201).send(products)
+
     } catch (error) {
         logger.error(error)
         res.redirect('/api/products/all')

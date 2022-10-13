@@ -155,8 +155,8 @@ if(isCluster && cluster.isPrimary) {
             if(!user || !isValidPassword(password, user.password)){
                 return done(null, null)
             }
-  
-            done(null, user)
+            req.username = user.username
+            return done(null, user)
             
         } catch (error) {
             console.log("Error login", err);
